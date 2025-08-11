@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Excel School Data Merger</title>
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNCIgZmlsbD0iIzY2N2VlYSIvPgo8dGV4dCB4PSI1IiB5PSIyMiIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmaWxsPSJ3aGl0ZSI+RTwvdGV4dD4KPC9zdmc+">
     <style>
         * {
             margin: 0;
@@ -164,6 +165,26 @@
             content: "✅ ";
             margin-right: 0.5rem;
         }
+
+        .processing {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -230,6 +251,7 @@
         const fileSize = document.getElementById('file-size');
         const submitBtn = document.getElementById('submit-btn');
         const uploadArea = document.querySelector('.upload-area');
+        const container = document.querySelector('.container');
         
         // File selection handler
         fileInput.addEventListener('change', function(e) {
@@ -283,8 +305,9 @@
         
         // Show loading state on form submit
         document.getElementById('uploadForm').addEventListener('submit', function() {
-            submitBtn.textContent = '⏳ Processing...';
+            submitBtn.innerHTML = '<span class="loading"></span>⏳ Processing...';
             submitBtn.disabled = true;
+            container.classList.add('processing');
         });
     </script>
 </body>

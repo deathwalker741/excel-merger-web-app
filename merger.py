@@ -53,18 +53,26 @@ def process_file(input_path, output_path):
     """
     Process the Excel file and merge rows by School No
     """
-    # Read Excel file as strings to avoid conversion issues
-    df = pd.read_excel(input_path, dtype=str)
-    
-    # Group and merge by School No
-    merged_df = df.groupby("School No", as_index=False).apply(merge_group)
-    
-    # Format numeric columns to 2-decimal format
-    for col in SUM_COLUMNS:
-        if col in merged_df.columns:
-            merged_df[col] = merged_df[col].astype(float).round(2)
-    
-    # Save to output file
-    merged_df.to_excel(output_path, index=False)
-    
-    return len(df), len(merged_df)  # Return original and merged row counts
+    try:
+        # Read Excel file as strings to avoid conversion issues
+        df = pd.read_excel(input_path, dtype=str)
+        
+        # Check if 'School No' column exists
+        if 'School No' not in df.columns:
+            raise ValueError("Excel file must contain a 'School No' column")
+        
+        # Group and merge by School No (fixed pandas deprecation warning)
+        merged_df = df.groupby("School No", as_index=False).apply(merge_group, include_groups=False)
+        
+        # Format numeric columns to 2-decimal format
+        for col in SUM_COLUMNS:
+            if col in merged_df.columns:
+                merged_df[col] = pd.to_numeric(merged_df[col], errors='coerce').fillna(0).round(2)
+        
+        # Save to output file
+        merged_df.to_excel(output_path, index=False)
+        
+        return len(df), len(merged_df)  # Return original and merged row counts
+        
+    except Exception as e:
+        raise Exception(f"Error processing file: {str(e)}")

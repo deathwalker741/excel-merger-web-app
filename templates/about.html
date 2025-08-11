@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Excel School Data Merger</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+        
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 800px;
+            width: 90%;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 2rem;
+            padding: 0.5rem 1rem;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: #5a67d8;
+        }
+        
+        .section {
+            margin-bottom: 2rem;
+        }
+        
+        .section h2 {
+            color: #333;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .feature-card {
+            background: #f8f9ff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .feature-card h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .code-example {
+            background: #f4f4f4;
+            padding: 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-btn">← Back to Upload</a>
+        
+        <div class="header">
+            <h1>📊 About Excel School Data Merger</h1>
+        </div>
+        
+        <div class="section">
+            <h2>What This Tool Does</h2>
+            <p>
+                This web application processes Excel files containing school data and intelligently merges duplicate records 
+                based on the <span class="highlight">School Number</span>. It's designed specifically for educational data 
+                management where multiple entries for the same school need to be consolidated.
+            </p>
+        </div>
+        
+        <div class="section">
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>🔢 Smart Financial Aggregation</h3>
+                    <p>Automatically sums up financial fields like revenues, order values, and student counts for duplicate schools.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>📝 Intelligent Text Merging</h3>
+                    <p>Combines text fields intelligently - keeps single values or merges unique values with commas.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>💰 Currency Handling</h3>
+                    <p>Cleans and processes currency values, removing symbols and formatting for accurate calculations.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>⏰ Timestamped Output</h3>
+                    <p>Generates unique output filenames with timestamps to prevent overwriting previous results.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Fields That Get Summed</h2>
+            <p>The following fields are automatically aggregated (summed) when merging duplicate school records:</p>
+            <ul style="margin-left: 2rem; color: #666; line-height: 1.8;">
+                <li>Total Order Value (Exclusive GST)</li>
+                <li>Total Order Value (Inclusive GST)</li>
+                <li>ASSET Revenue</li>
+                <li>ASSETStudents</li>
+                <li>CARES Revenue</li>
+                <li>CARESStudents</li>
+                <li>Mindspark Revenue</li>
+                <li>MindsparkStudents</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>How It Works</h2>
+            <p><strong>Step 1:</strong> Upload your Excel (.xlsx) file containing school data</p>
+            <p><strong>Step 2:</strong> The system groups all rows by "School No"</p>
+            <p><strong>Step 3:</strong> For each group:</p>
+            <ul style="margin-left: 2rem; color: #666; line-height: 1.6;">
+                <li>Financial fields are summed together</li>
+                <li>Text fields are merged (identical values kept as-is, different values combined with commas)</li>
+                <li>School numbers are preserved</li>
+            </ul>
+            <p><strong>Step 4:</strong> Download the processed file with merged data</p>
+        </div>
+        
+        <div class="section">
+            <h2>File Requirements</h2>
+            <p>Your Excel file should:</p>
+            <ul style="margin-left: 2rem; color: #666; line-height: 1.6;">
+                <li>Be in .xlsx format</li>
+                <li>Have a column named "School No" for grouping</li>
+                <li>Include the financial columns you want to aggregate</li>
+                <li>Have proper headers in the first row</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Technical Details</h2>
+            <p>
+                Built with Python Flask and pandas for robust data processing. The application handles currency formatting, 
+                null values, and various data types automatically. All processing is done server-side for security and performance.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -6,7 +6,7 @@ from merger import process_file
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-app.secret_key = 'excel-merger-secret-key-2024'
+app.secret_key = 'excel-merger-secret-key-2024-v2'
 
 # Configuration
 UPLOAD_FOLDER = "uploads"
